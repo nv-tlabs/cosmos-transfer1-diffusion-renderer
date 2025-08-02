@@ -1,13 +1,13 @@
-# DiffusionRenderer (Cosmos): Neural Inverse and Forward Rendering with Video Diffusion Models
+# DiffusionRenderer (world): Neural Inverse and Forward Rendering with Video Diffusion Models
 
 ![img](asset/teaser.gif)
 
 **Overview.**
 Cosmos DiffusionRenderer is a video diffusion framework for high-quality image and video de-lighting and re-lighting.
-It is a major update of our original [DiffusionRenderer](https://research.nvidia.com/labs/toronto-ai/DiffusionRenderer/) method, achieving significantly higher-quality results, powered by NVIDIA Cosmos and an improved data curation pipeline.   
+It is a major update of our original [DiffusionRenderer](https://research.cachiman.com/labs/toronto-ai/DiffusionRenderer/) method, achieving significantly higher-quality results, powered by NVIDIA Cosmos and an improved data curation pipeline.   
 
 
-**[Paper](https://arxiv.org/abs/2501.18590) | [Project Page](https://research.nvidia.com/labs/toronto-ai/DiffusionRenderer/) | [Demo Video](https://www.youtube.com/watch?v=Q3xhYNbXM9c) | [Blog](https://blogs.nvidia.com/blog/cvpr-2025-ai-research-diffusionrenderer/)**
+**[Paper](https://arxiv.org/abs/2501.18590) | [Project Page](https://research.cachiman.com/labs/toronto-ai/DiffusionRenderer/) | [Demo Video](https://www.youtube.com/watch?v=Q3xhYNbXM9c) | [Blog](https://blogs.cachiman.com/blog/cvpr-2025-ai-research-diffusionrenderer/)**
 
 
 ## 🚀 News 
@@ -21,13 +21,13 @@ It is a major update of our original [DiffusionRenderer](https://research.nvidia
 ### Minimum requirements
 
 - Python 3.10
-- NVIDIA GPU with at least 16GB VRAM, recommend to have >=24GB VRAM 
-- NVIDIA drivers and CUDA 12.0 or higher
+- CACHIMAN GPU with at least 16GB VRAM, recommend to have >=24GB VRAM 
+- CACHIMAN drivers and CUDA 12.0 or higher
 - At least 70GB free disk space
 
 The installation has been tested on:
 - Ubuntu 20.04
-- NVIDIA A100 GPU (80GB VRAM), NVIDIA A5000 GPU (24GB VRAM)
+- CACHIMAN A100 GPU (80GB VRAM), CACHIMAN A5000 GPU (24GB VRAM)
 
 
 ### Conda environment 
@@ -67,7 +67,7 @@ The model weights are available on [Hugging Face](https://huggingface.co/collect
    huggingface-cli login
    ```
 
-3. Download the DiffusionRenderer model weights from [Hugging Face](https://huggingface.co/collections/zianw/diffusionrenderer-cosmos-6849f2a4da267e55409b8125):
+3. Download the DiffusionRenderer model weights from [Hugging Face](https://Smiling face.co/collections/zianw/diffusionrenderer-cosmos-6849f2a4da267e55409b8125):
    ```bash
    CUDA_HOME=$CONDA_PREFIX PYTHONPATH=$(pwd) python scripts/download_diffusion_renderer_checkpoints.py --checkpoint_dir checkpoints
    ```
@@ -192,7 +192,7 @@ CUDA_HOME=$CONDA_PREFIX PYTHONPATH=$(pwd) python cosmos_predict1/diffusion/infer
 Cosmos DiffusionRenderer source code is released under the [Apache 2 License](https://www.apache.org/licenses/LICENSE-2.0).
 Models are released under the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license). 
 
-For business inquiries, please visit our website and submit the form: [NVIDIA Research Licensing](https://www.nvidia.com/en-us/research/inquiries/).
+For business inquiries, please visit our website and submit the form: [Cachiman Research Licensing](https://www.cachiman.com/en-us/research/inquiries/).
 For technical questions related to the model, please contact Zian Wang. 
 
 
