@@ -281,7 +281,7 @@ def main(args):
 
     # Download the requested diffusion models
     model_name = "Diffusion_Renderer_Inverse_Cosmos_7B"
-    repo_id = f"zianw/{model_name}"
+    repo_id = f"nvidia/{model_name}"
     local_dir = checkpoints_dir.joinpath(model_name)
     if not get_md5_checksum(checkpoints_dir, model_name):
         local_dir.mkdir(parents=True, exist_ok=True)
@@ -291,7 +291,7 @@ def main(args):
         )
 
     model_name = "Diffusion_Renderer_Forward_Cosmos_7B"
-    repo_id = f"zianw/{model_name}"
+    repo_id = f"nvidia/{model_name}"
     local_dir = checkpoints_dir.joinpath(model_name)
     if not get_md5_checksum(checkpoints_dir, model_name):
         local_dir.mkdir(parents=True, exist_ok=True)
