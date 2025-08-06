@@ -21,13 +21,13 @@ It is a major update of our original [DiffusionRenderer](https://research.nvidia
 ### Minimum requirements
 
 - Python 3.10
-- NVIDIA GPU with at least 16GB VRAM, recommend to have >=24GB VRAM 
+- NVIDIA GPU with at least 16GB VRAM, recommend to have >=48GB VRAM 
 - NVIDIA drivers and CUDA 12.0 or higher
 - At least 70GB free disk space
 
 The installation has been tested on:
 - Ubuntu 20.04
-- NVIDIA A100 GPU (80GB VRAM), NVIDIA A5000 GPU (24GB VRAM)
+- NVIDIA A100 GPU (80GB VRAM), NVIDIA A6000 GPU (48GB VRAM)
 
 
 ### Conda environment 
