@@ -21,18 +21,17 @@ RUN apt-get update && apt-get install -y git tree ffmpeg wget && \
     rm /bin/sh && ln -s /bin/bash /bin/sh && ln -s /lib64/libcuda.so.1 /lib64/libcuda.so
 
 # Copy the cosmos-predict1.yaml and requirements.txt files to the container
-# cosmos predict yaml installs cuda 12.4 base image is on cuda 12.6
+# cosmos-predict1.yaml installs cuda 12.4 nvcr.io/nvidia/pytorch:24.10-py3 is cuda 12.6
 COPY ./cosmos-predict1.yaml /cosmos-predict1.yaml
 COPY ./requirements.txt /requirements.txt
 
 ENV CONDA_DIR=/opt/conda
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH=${CONDA_DIR}/bin:${PATH}
-ENV ENVNAME=cosmos-predict1
-ENV ENVDIR=${CONDA_DIR}/envs/${ENVNAME}
-ENV CUDA_HOME=${ENVDIR}
+ENV ENV_NAME=cosmos-predict1
+ENV ENV_DIR=${CONDA_DIR}/envs/${ENV_NAME}
 ENV CONDA_ACCEPT_TERMS=true
-ENV PATH=${ENVDIR}/bin:${PATH}
+ENV PATH=${ENV_DIR}/bin:${PATH}
 
 RUN echo "Installing dependencies. This will take a while..." && \
     rm -rf ${CONDA_DIR} /tmp/mamba.sh && \
@@ -45,22 +44,25 @@ RUN echo "Installing dependencies. This will take a while..." && \
     find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete && \
     conda clean --force-pkgs-dirs --all --yes 
 
-# use bash for subsequent RUN, no need to do RUN /bin/bash -c 
+# use bash all RUN cmds, replacing RUN /bin/bash -c 
 SHELL ["/bin/bash", "-c"]
 
-RUN mamba env create --file /${ENVNAME}.yaml && \
-    source ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENVNAME} && \
+RUN mamba env create --file /${ENV_NAME}.yaml && \
+    source ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENV_NAME} && \
     pip install --no-cache-dir -r /requirements.txt && \
-    ln -sf ${ENVDIR}/lib/python3.10/site-packages/nvidia/*/include/* ${ENVDIR}/include/ && \
-    ln -sf ${ENVDIR}/lib/python3.10/site-packages/nvidia/*/include/* ${ENVDIR}/include/python3.10 && \
-    ln -sf ${ENVDIR}/lib/python3.10/site-packages/triton/backends/nvidia/include/* ${ENVDIR}/include/ && \
-    pip install transformer-engine[pytorch]==1.12.0 && \
+    ln -sf ${ENV_DIR}/lib/python3.10/site-packages/nvidia/*/include/* ${ENV_DIR}/include/ && \
+    ln -sf ${ENV_DIR}/lib/python3.10/site-packages/nvidia/*/include/* ${ENV_DIR}/include/python3.10 && \
+    ln -sf ${ENV_DIR}/lib/python3.10/site-packages/triton/backends/nvidia/include/* ${ENV_DIR}/include/ && \
+    CUDA_HOME=${ENV_DIR} pip install transformer-engine[pytorch]==1.12.0 && \
     git clone https://github.com/NVIDIA/apex && \
-    ln -sf ${ENVDIR}/lib/python3.10/site-packages/triton/backends/nvidia/include/crt ${ENVDIR}/include/ && \
-    pip install git+https://github.com/NVlabs/nvdiffrast.git && \
-    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENVNAME}" >> /etc/skel/.bashrc && \
-    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENVNAME}" >> ~/.bashrc 
+    CUDA_HOME=${ENV_DIR} pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" apex/. && \
+    ln -sf ${ENV_DIR}/lib/python3.10/site-packages/triton/backends/nvidia/include/crt ${ENV_DIR}/include/ && \
+    CUDA_HOME=${ENV_DIR} pip install git+https://github.com/NVlabs/nvdiffrast.git && \
+    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENV_NAME}" >> /etc/skel/.bashrc && \
+    echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENV_NAME}" >> ~/.bashrc
 
-ENV PATH=${ENVDIR}/bin:${PATH}
+# switch CUDA_HOME inside environemnt, without changing HOME in default environemnt
+RUN echo "export CUDA_HOME=${ENV_DIR}:${CUDA_HOME} " >> ${ENV_DIR}/etc/conda/activate.d/env_vars.sh && \
+    echo "export CUDA_HOME=$(echo $CUDA_HOME | sed 's|${ENV_DIR}:||') " >> ${ENV_DIR}/etc/conda/deactivate.d/env_vars.sh
 
 CMD ["/bin/bash"]
