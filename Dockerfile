@@ -62,7 +62,15 @@ RUN mamba env create --file /${ENV_NAME}.yaml && \
     echo ". ${CONDA_DIR}/etc/profile.d/conda.sh && conda activate ${ENV_NAME}" >> ~/.bashrc
 
 # switch CUDA_HOME inside environemnt, without changing HOME in default environemnt
-RUN echo "export CUDA_HOME=${ENV_DIR}:${CUDA_HOME} " >> ${ENV_DIR}/etc/conda/activate.d/env_vars.sh && \
-    echo "export CUDA_HOME=$(echo $CUDA_HOME | sed 's|${ENV_DIR}:||') " >> ${ENV_DIR}/etc/conda/deactivate.d/env_vars.sh
+RUN echo "export CUDA_HOME=${ENV_DIR} " >> ${ENV_DIR}/etc/conda/activate.d/env_vars.sh && \
+    echo "export CUDA_HOME=/usr/local/cuda" >> ${ENV_DIR}/etc/conda/deactivate.d/env_vars.sh
+
+## build passing path
+# docker build --build-arg DOCKERFILE="$(pwd)/Dockerfile" -f Dockerfile . -t nvidia/xvdp/cosmos-predict1:latest
+# docker inspect --format='{{index .Config.Labels "dockerfile"}}' nvidia/xvdp/cosmos-predict1:latest
+ARG DOCKERFILE
+LABEL dockerfile="${DOCKERFILE}"
+# run 
+    # docker run --gpus device=1 --cpuset-cpus=0-10 --network=host  -it --rm --shm-size 30g -v `pwd`:/app --workdir /app -e TORCH_EXTENSIONS_DIR=/app/tmp nvidia/xvdp/cosmos-predict1:latest
 
 CMD ["/bin/bash"]
