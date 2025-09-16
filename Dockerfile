@@ -65,12 +65,4 @@ RUN mamba env create --file /${ENV_NAME}.yaml && \
 RUN echo "export CUDA_HOME=${ENV_DIR} " >> ${ENV_DIR}/etc/conda/activate.d/env_vars.sh && \
     echo "export CUDA_HOME=/usr/local/cuda" >> ${ENV_DIR}/etc/conda/deactivate.d/env_vars.sh
 
-## build passing path
-# docker build --build-arg DOCKERFILE="$(pwd)/Dockerfile" -f Dockerfile . -t nvidia/xvdp/cosmos-predict1:latest
-# docker inspect --format='{{index .Config.Labels "dockerfile"}}' nvidia/xvdp/cosmos-predict1:latest
-ARG DOCKERFILE
-LABEL dockerfile="${DOCKERFILE}"
-# run 
-    # docker run --gpus device=1 --cpuset-cpus=0-10 --network=host  -it --rm --shm-size 30g -v `pwd`:/app --workdir /app -e TORCH_EXTENSIONS_DIR=/app/tmp nvidia/xvdp/cosmos-predict1:latest
-
 CMD ["/bin/bash"]
