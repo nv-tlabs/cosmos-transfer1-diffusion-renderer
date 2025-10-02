@@ -1,13 +1,13 @@
-# DiffusionRenderer (Cosmos): Neural Inverse and Forward Rendering with Video Diffusion Models
+# Cosmos-Transfer1-DiffusionRenderer
 
-![img](asset/teaser.gif)
 
-**Overview.**
-Cosmos DiffusionRenderer is a video diffusion framework for high-quality image and video de-lighting and re-lighting.
-It is a major update of our original [DiffusionRenderer](https://research.nvidia.com/labs/toronto-ai/DiffusionRenderer/) method, achieving significantly higher-quality results, powered by NVIDIA Cosmos and an improved data curation pipeline.   
-
+Cosmos-Transfer1-DiffusionRenderer is a dedicated video relighting framework based on [NVIDIA Cosmos World Foundation Models](https://www.nvidia.com/en-us/ai/cosmos/), designed for high-quality de-lighting and re-lighting of input image or videos.
+It enables controllable video lighting manipulation, editing, and synthetic data augmentation—supporting physical AI systems to train perception and policy models with improved robustness to varying lighting conditions.
+It is powered by NVIDIA’s Cosmos framework and builds on the research project [DiffusionRenderer](https://research.nvidia.com/labs/toronto-ai/DiffusionRenderer/), with an improved data pipeline and enhanced visual fidelity.
 
 **[Paper](https://arxiv.org/abs/2501.18590) | [Project Page](https://research.nvidia.com/labs/toronto-ai/DiffusionRenderer/) | [Demo Video](https://www.youtube.com/watch?v=Q3xhYNbXM9c) | [Blog](https://blogs.nvidia.com/blog/cvpr-2025-ai-research-diffusionrenderer/)**
+
+![img](asset/teaser.gif)
 
 
 ## 🚀 News 
