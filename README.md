@@ -11,9 +11,9 @@ It is powered by NVIDIA’s Cosmos framework and builds on the research project 
 
 
 ## 🚀 News 
--  [June 12, 2025] 🔥 Released Cosmos DiffusionRenderer code and model weights in this repo!  
--  [June 11, 2025] 🎬 Released our [video demo](https://www.youtube.com/watch?v=Q3xhYNbXM9c) and [blog](https://blogs.nvidia.com/blog/cvpr-2025-ai-research-diffusionrenderer/) on Cosmos DiffusionRenderer. 
--  [June 11, 2025] 🔥 Released the code and model weights for the academic version of DiffusionRenderer. This version reproduces the results in our paper. Check the [GitHub repo](https://github.com/nv-tlabs/diffusion-renderer) and [model weights](https://huggingface.co/collections/nexuslrf/diffusionrenderer-svd-68472d636e85c29b6c25422f)! 
+-  [June 12, 2025] 🔥 Released Cosmos-Transfer1-DiffusionRenderer code and model weights in this repo!  
+-  [June 11, 2025] 🎬 Released our [video demo](https://www.youtube.com/watch?v=Q3xhYNbXM9c) and [blog](https://blogs.nvidia.com/blog/cvpr-2025-ai-research-diffusionrenderer/) on Cosmos-Transfer1-DiffusionRenderer. 
+-  [June 11, 2025] 🔥 Released the code and model weights for the academic version of DiffusionRenderer. This version reproduces the results in our paper. Check the [GitHub repo](https://github.com/nv-tlabs/diffusion-renderer) and [model weights](https://huggingface.co/collections/nexuslrf/diffusionrenderer-svd-68472d636e85c29b6c25422f). 
 
 
 ## Installation
@@ -189,7 +189,7 @@ CUDA_HOME=$CONDA_PREFIX PYTHONPATH=$(pwd) python cosmos_predict1/diffusion/infer
 
 ## License and Contact
 
-Cosmos DiffusionRenderer source code is released under the [Apache 2 License](https://www.apache.org/licenses/LICENSE-2.0).
+Cosmos-Transfer1-DiffusionRenderer source code is released under the [Apache 2 License](https://www.apache.org/licenses/LICENSE-2.0).
 Models are released under the [NVIDIA Open Model License](https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license). 
 
 For business inquiries, please visit our website and submit the form: [NVIDIA Research Licensing](https://www.nvidia.com/en-us/research/inquiries/).
